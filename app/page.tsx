@@ -4,12 +4,15 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import {
   BookOpenText,
+  Brain,
   Check,
   Cloud,
   Flame,
   LoaderCircle,
   LockKeyhole,
   LogOut,
+  Play,
+  RotateCcw,
   Sparkles,
   UserRound,
   Volume2,
@@ -27,6 +30,9 @@ type ProgressRow = {
   completed_grammar: number[];
   completed: boolean;
 };
+
+type QuizKind = "meaning" | "japanese" | "audio";
+type QuizFeedback = "correct" | "wrong" | null;
 
 const pad = (value: number) => String(value).padStart(2, "0");
 
@@ -63,6 +69,19 @@ function calculateStreak(completedDates: string[], today: Date) {
   return streak;
 }
 
+function seededOrder(values: number[], seed: number) {
+  return [...values].sort((a, b) => {
+    const scoreA = ((a + 11) * 9301 + seed * 49297) % 233280;
+    const scoreB = ((b + 11) * 9301 + seed * 49297) % 233280;
+    return scoreA - scoreB;
+  });
+}
+
+function questionKind(wordIndex: number, correctCount: number): QuizKind {
+  if (correctCount === 0) return wordIndex % 3 === 0 ? "audio" : wordIndex % 2 === 0 ? "meaning" : "japanese";
+  return wordIndex % 2 === 0 ? "japanese" : "meaning";
+}
+
 export default function Home() {
   const [today] = useState(() => new Date());
   const [user, setUser] = useState<User | null>(null);
@@ -77,6 +96,12 @@ export default function Home() {
   const [checkedWords, setCheckedWords] = useState<number[]>([]);
   const [checkedGrammar, setCheckedGrammar] = useState<number[]>([]);
   const [streak, setStreak] = useState(0);
+  const [quizActive, setQuizActive] = useState(false);
+  const [quizQueue, setQuizQueue] = useState<number[]>([]);
+  const [quizCorrectCounts, setQuizCorrectCounts] = useState<Record<number, number>>({});
+  const [quizFeedback, setQuizFeedback] = useState<QuizFeedback>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [questionSequence, setQuestionSequence] = useState(0);
 
   const date = localDateKey(today);
   const lessonIndex = dayOfYear(today) % n5Lessons.length;
@@ -84,6 +109,17 @@ export default function Home() {
   const completeCount = checkedWords.length + checkedGrammar.length;
   const wordsDone = checkedWords.length === lesson.words.length;
   const lessonDone = wordsDone && checkedGrammar.length === lesson.grammar.length;
+  const currentWordIndex = quizQueue[0] ?? null;
+  const currentCorrectCount = currentWordIndex === null ? 0 : (quizCorrectCounts[currentWordIndex] ?? 0);
+  const currentQuizKind = currentWordIndex === null ? "meaning" : questionKind(currentWordIndex, currentCorrectCount);
+  const quizOptions = useMemo(() => {
+    if (currentWordIndex === null) return [];
+    const distractors = seededOrder(
+      lesson.words.map((_, index) => index).filter((index) => index !== currentWordIndex),
+      lessonIndex * 100 + questionSequence,
+    ).slice(0, 3);
+    return seededOrder([currentWordIndex, ...distractors], lessonIndex * 1000 + questionSequence + 7);
+  }, [currentWordIndex, lesson.words, lessonIndex, questionSequence]);
 
   const loadLearningData = useCallback(async (activeUser: User) => {
     setDataLoading(true);
@@ -107,6 +143,11 @@ export default function Home() {
     setUsername(profile?.username ?? activeUser.user_metadata?.username ?? "學習者");
     setCheckedWords(progress?.completed_words ?? []);
     setCheckedGrammar(progress?.completed_grammar ?? []);
+    setQuizActive(false);
+    setQuizQueue([]);
+    setQuizCorrectCounts({});
+    setQuizFeedback(null);
+    setSelectedAnswer(null);
     setStreak(calculateStreak((completedRows ?? []).map((row) => row.lesson_date), today));
     setDataLoading(false);
   }, [date, today]);
@@ -127,6 +168,11 @@ export default function Home() {
         setUsername("");
         setCheckedWords([]);
         setCheckedGrammar([]);
+        setQuizActive(false);
+        setQuizQueue([]);
+        setQuizCorrectCounts({});
+        setQuizFeedback(null);
+        setSelectedAnswer(null);
         setStreak(0);
       }
     });
@@ -155,12 +201,53 @@ export default function Home() {
     setSyncing(false);
   };
 
-  const toggleWord = (index: number) => {
-    const next = checkedWords.includes(index)
-      ? checkedWords.filter((item) => item !== index)
-      : [...checkedWords, index].sort((a, b) => a - b);
-    setCheckedWords(next);
-    void saveProgress(next, checkedGrammar);
+  const startQuiz = () => {
+    const remaining = lesson.words
+      .map((_, index) => index)
+      .filter((index) => !checkedWords.includes(index));
+    setQuizQueue(seededOrder(remaining, lessonIndex * 97 + checkedWords.length));
+    setQuizCorrectCounts({});
+    setQuizFeedback(null);
+    setSelectedAnswer(null);
+    setQuestionSequence((current) => current + 1);
+    setQuizActive(remaining.length > 0);
+  };
+
+  const answerQuiz = (answerIndex: number) => {
+    if (currentWordIndex === null || quizFeedback) return;
+    setSelectedAnswer(answerIndex);
+    setQuizFeedback(answerIndex === currentWordIndex ? "correct" : "wrong");
+  };
+
+  const advanceQuiz = () => {
+    if (currentWordIndex === null || !quizFeedback) return;
+
+    const remainingQueue = quizQueue.slice(1);
+    const nextCounts = { ...quizCorrectCounts };
+    let nextCompleted = checkedWords;
+
+    if (quizFeedback === "correct") {
+      const nextCount = currentCorrectCount + 1;
+      if (nextCount >= 2) {
+        delete nextCounts[currentWordIndex];
+        nextCompleted = [...checkedWords, currentWordIndex].sort((a, b) => a - b);
+        setCheckedWords(nextCompleted);
+        void saveProgress(nextCompleted, checkedGrammar);
+      } else {
+        nextCounts[currentWordIndex] = nextCount;
+        remainingQueue.push(currentWordIndex);
+      }
+    } else {
+      nextCounts[currentWordIndex] = 0;
+      remainingQueue.push(currentWordIndex);
+    }
+
+    setQuizCorrectCounts(nextCounts);
+    setQuizFeedback(null);
+    setSelectedAnswer(null);
+    setQuestionSequence((current) => current + 1);
+    setQuizQueue(remainingQueue);
+    if (remainingQueue.length === 0) setQuizActive(false);
   };
 
   const toggleGrammar = (index: number) => {
@@ -305,7 +392,7 @@ export default function Home() {
         </div>
         <Progress value={(completeCount / 13) * 100} className="h-2.5 bg-[#e8dfd2] [&>div]:bg-[#d9544d]" />
         <div className="progress-bottom">
-          <p>{lessonDone ? "今日（きょう）の任務（にんむ）、完成（かんせい）！" : wordsDone ? "單字完成，進入文法練習吧。" : "先認識 10 個單字，再完成 3 個文法。"}</p>
+          <p>{lessonDone ? "今日（きょう）の任務（にんむ）、完成（かんせい）！" : wordsDone ? "單字測驗通過，進入文法練習吧。" : "先學習 10 個單字，通過測驗後再完成 3 個文法。"}</p>
           <span><Flame size={16} />連續 {streak} 天</span>
         </div>
       </section>
@@ -327,20 +414,71 @@ export default function Home() {
               <div><p>VOCABULARY</p><h2>今日（きょう）の単語（たんご）</h2></div>
               <span>{checkedWords.length} / 10</span>
             </div>
-            <div className="word-grid">
-              {lesson.words.map((word, index) => {
-                const done = checkedWords.includes(index);
-                return (
-                  <article className={`word-card ${done ? "done" : ""}`} key={`${word.japanese}-${index}`}>
-                    <Checkbox checked={done} onCheckedChange={() => toggleWord(index)} aria-label={`${word.japanese} 已學會`} className="word-checkbox" />
-                    <button className="word-body" onClick={() => toggleWord(index)}>
-                      <span className="reading">{word.reading}</span><strong>{word.japanese}</strong><span className="meaning">{word.meaning}</span>
-                    </button>
-                    <Button variant="ghost" size="icon" className="speak-button" onClick={() => speak(word.japanese)} aria-label={`播放 ${word.japanese} 的發音`}><Volume2 size={20} /></Button>
-                  </article>
-                );
-              })}
+            <div className="study-method">
+              <Brain size={22} />
+              <div><strong>看完後用回想測驗確認</strong><span>每個單字要答對兩次；答錯的稍後會再出現。</span></div>
             </div>
+
+            {!quizActive ? (
+              <>
+                <div className="word-grid">
+                  {lesson.words.map((word, index) => {
+                    const done = checkedWords.includes(index);
+                    return (
+                      <article className={`word-card ${done ? "done" : ""}`} key={`${word.japanese}-${index}`}>
+                        <span className={`word-status ${done ? "passed" : ""}`}>{done ? <><Check size={13} />已通過</> : "待測驗"}</span>
+                        <div className="word-body">
+                          <span className="reading">{word.reading}</span><strong>{word.japanese}</strong><span className="meaning">{word.meaning}</span>
+                        </div>
+                        <Button variant="ghost" size="icon" className="speak-button" onClick={() => speak(word.japanese)} aria-label={`播放 ${word.japanese} 的發音`}><Volume2 size={20} /></Button>
+                      </article>
+                    );
+                  })}
+                </div>
+                <button className="quiz-launch" onClick={startQuiz} disabled={wordsDone}>
+                  {wordsDone ? <><Check size={19} />10 個單字全部通過</> : <><Play size={19} fill="currentColor" />{checkedWords.length > 0 ? "繼續單字測驗" : "開始單字測驗"}</>}
+                </button>
+              </>
+            ) : currentWordIndex !== null ? (
+              <section className="quiz-panel" aria-live="polite">
+                <div className="quiz-topline">
+                  <div><span>ACTIVE RECALL</span><strong>記憶測驗</strong></div>
+                  <button onClick={() => setQuizActive(false)}>返回單字表</button>
+                </div>
+                <div className="quiz-meta">
+                  <span>已通過 {checkedWords.length} / 10</span>
+                  <span>這個單字第 {currentCorrectCount + 1} / 2 次</span>
+                </div>
+
+                <div className="quiz-prompt">
+                  {currentQuizKind === "meaning" && <><p>這個單字的中文意思是？</p><span>{lesson.words[currentWordIndex].reading}</span><strong>{lesson.words[currentWordIndex].japanese}</strong></>}
+                  {currentQuizKind === "japanese" && <><p>哪一個日文是這個意思？</p><strong>{lesson.words[currentWordIndex].meaning}</strong></>}
+                  {currentQuizKind === "audio" && <><p>聽發音，選出正確的中文意思</p><button className="quiz-audio" onClick={() => speak(lesson.words[currentWordIndex].japanese)}><Volume2 size={26} />播放日文發音</button></>}
+                </div>
+
+                <div className="quiz-options">
+                  {quizOptions.map((optionIndex) => {
+                    const option = lesson.words[optionIndex];
+                    const isCorrect = optionIndex === currentWordIndex;
+                    const isSelected = optionIndex === selectedAnswer;
+                    const resultClass = quizFeedback && isCorrect ? "correct" : quizFeedback === "wrong" && isSelected ? "wrong" : "";
+                    return (
+                      <button key={optionIndex} className={resultClass} onClick={() => answerQuiz(optionIndex)} disabled={Boolean(quizFeedback)}>
+                        {currentQuizKind === "japanese" ? <><strong>{option.japanese}</strong><small>{option.reading}</small></> : option.meaning}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {quizFeedback && (
+                  <div className={`quiz-feedback ${quizFeedback}`}>
+                    <div>{quizFeedback === "correct" ? <Check /> : <RotateCcw />}</div>
+                    <p><strong>{quizFeedback === "correct" ? "答對了！" : "還沒記住，稍後再考一次"}</strong><span>{lesson.words[currentWordIndex].japanese}（{lesson.words[currentWordIndex].reading}）＝ {lesson.words[currentWordIndex].meaning}</span></p>
+                    <button onClick={advanceQuiz}>繼續</button>
+                  </div>
+                )}
+              </section>
+            ) : null}
           </section>
 
           <section className={`lesson-section grammar-section ${!wordsDone ? "locked" : ""}`}>
@@ -349,7 +487,7 @@ export default function Home() {
               <div><p>GRAMMAR</p><h2>今日（きょう）の文法（ぶんぽう）</h2></div>
               <span>{checkedGrammar.length} / 3</span>
             </div>
-            {!wordsDone && <div className="grammar-lock"><LockKeyhole size={24} /><p><strong>先完成 10 個單字</strong><span>完成後，今天的 3 個文法會在這裡開啟。</span></p></div>}
+            {!wordsDone && <div className="grammar-lock"><LockKeyhole size={24} /><p><strong>先通過 10 個單字測驗</strong><span>每個單字答對兩次後，今天的 3 個文法會在這裡開啟。</span></p></div>}
             <div className="grammar-list" aria-hidden={!wordsDone}>
               {lesson.grammar.map((item, index) => {
                 const done = checkedGrammar.includes(index);
@@ -380,4 +518,3 @@ export default function Home() {
     </main>
   );
 }
-

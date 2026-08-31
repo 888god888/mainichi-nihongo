@@ -1,4 +1,4 @@
-const CACHE = "mainichi-nihongo-v1";
+const CACHE = "mainichi-nihongo-v2";
 const APP_SHELL = ["./", "./manifest.webmanifest", "./favicon.svg", "./apple-touch-icon.png", "./icon-512.png"];
 
 self.addEventListener("install", (event) => {
