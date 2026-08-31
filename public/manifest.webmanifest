@@ -1,0 +1,13 @@
+{
+  "name": "每日日本語",
+  "short_name": "每日日本語",
+  "description": "每天 10 個單字與 3 個文法，從 JLPT N5 開始。",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f0e6",
+  "theme_color": "#f6f0e6",
+  "icons": [
+    { "src": "./favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
