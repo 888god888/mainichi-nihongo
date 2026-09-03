@@ -31,7 +31,7 @@ type ProgressRow = {
   completed: boolean;
 };
 
-type QuizKind = "meaning" | "japanese" | "audio";
+type QuizKind = "reading" | "audio";
 type QuizFeedback = "correct" | "wrong" | null;
 
 const pad = (value: number) => String(value).padStart(2, "0");
@@ -78,8 +78,9 @@ function seededOrder(values: number[], seed: number) {
 }
 
 function questionKind(wordIndex: number, correctCount: number): QuizKind {
-  if (correctCount === 0) return wordIndex % 3 === 0 ? "audio" : wordIndex % 2 === 0 ? "meaning" : "japanese";
-  return wordIndex % 2 === 0 ? "japanese" : "meaning";
+  // 每個單字第一次一定考聽力；第二次多數仍為聽力，其餘考平假名辨認。
+  if (correctCount === 0) return "audio";
+  return wordIndex % 3 === 0 ? "reading" : "audio";
 }
 
 export default function Home() {
@@ -111,7 +112,7 @@ export default function Home() {
   const lessonDone = wordsDone && checkedGrammar.length === lesson.grammar.length;
   const currentWordIndex = quizQueue[0] ?? null;
   const currentCorrectCount = currentWordIndex === null ? 0 : (quizCorrectCounts[currentWordIndex] ?? 0);
-  const currentQuizKind = currentWordIndex === null ? "meaning" : questionKind(currentWordIndex, currentCorrectCount);
+  const currentQuizKind = currentWordIndex === null ? "audio" : questionKind(currentWordIndex, currentCorrectCount);
   const quizOptions = useMemo(() => {
     if (currentWordIndex === null) return [];
     const distractors = seededOrder(
@@ -205,12 +206,14 @@ export default function Home() {
     const remaining = lesson.words
       .map((_, index) => index)
       .filter((index) => !checkedWords.includes(index));
-    setQuizQueue(seededOrder(remaining, lessonIndex * 97 + checkedWords.length));
+    const nextQueue = seededOrder(remaining, lessonIndex * 97 + checkedWords.length);
+    setQuizQueue(nextQueue);
     setQuizCorrectCounts({});
     setQuizFeedback(null);
     setSelectedAnswer(null);
     setQuestionSequence((current) => current + 1);
     setQuizActive(remaining.length > 0);
+    if (nextQueue.length > 0) speak(lesson.words[nextQueue[0]].japanese);
   };
 
   const answerQuiz = (answerIndex: number) => {
@@ -248,6 +251,13 @@ export default function Home() {
     setQuestionSequence((current) => current + 1);
     setQuizQueue(remainingQueue);
     if (remainingQueue.length === 0) setQuizActive(false);
+    else {
+      const nextWordIndex = remainingQueue[0];
+      const nextCorrectCount = nextCounts[nextWordIndex] ?? 0;
+      if (questionKind(nextWordIndex, nextCorrectCount) === "audio") {
+        speak(lesson.words[nextWordIndex].japanese);
+      }
+    }
   };
 
   const toggleGrammar = (index: number) => {
@@ -416,7 +426,7 @@ export default function Home() {
             </div>
             <div className="study-method">
               <Brain size={22} />
-              <div><strong>看完後用回想測驗確認</strong><span>每個單字要答對兩次；答錯的稍後會再出現。</span></div>
+              <div><strong>看完後用聽力測驗確認</strong><span>約八成是聽力題，作答前不顯示漢字；每個單字要答對兩次。</span></div>
             </div>
 
             {!quizActive ? (
@@ -451,9 +461,8 @@ export default function Home() {
                 </div>
 
                 <div className="quiz-prompt">
-                  {currentQuizKind === "meaning" && <><p>這個單字的中文意思是？</p><span>{lesson.words[currentWordIndex].reading}</span><strong>{lesson.words[currentWordIndex].japanese}</strong></>}
-                  {currentQuizKind === "japanese" && <><p>哪一個日文是這個意思？</p><strong>{lesson.words[currentWordIndex].meaning}</strong></>}
-                  {currentQuizKind === "audio" && <><p>聽發音，選出正確的中文意思</p><button className="quiz-audio" onClick={() => speak(lesson.words[currentWordIndex].japanese)}><Volume2 size={26} />播放日文發音</button></>}
+                  {currentQuizKind === "audio" && <><p>聽發音，選出正確的中文意思</p><span>{lesson.words[currentWordIndex].reading}</span><button className="quiz-audio" onClick={() => speak(lesson.words[currentWordIndex].japanese)}><Volume2 size={26} />重新播放</button></>}
+                  {currentQuizKind === "reading" && <><p>選出正確的平假名讀音</p><strong>{lesson.words[currentWordIndex].meaning}</strong></>}
                 </div>
 
                 <div className="quiz-options">
@@ -464,7 +473,7 @@ export default function Home() {
                     const resultClass = quizFeedback && isCorrect ? "correct" : quizFeedback === "wrong" && isSelected ? "wrong" : "";
                     return (
                       <button key={optionIndex} className={resultClass} onClick={() => answerQuiz(optionIndex)} disabled={Boolean(quizFeedback)}>
-                        {currentQuizKind === "japanese" ? <><strong>{option.japanese}</strong><small>{option.reading}</small></> : option.meaning}
+                        {currentQuizKind === "reading" ? <strong>{option.reading}</strong> : option.meaning}
                       </button>
                     );
                   })}
