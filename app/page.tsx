@@ -48,7 +48,7 @@ function dayOfYear(date: Date) {
 function speak(text: string) {
   if (!("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text.replace(/（[^）]+）/g, ""));
+  const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = "ja-JP";
   utterance.rate = 0.82;
   const voice = window.speechSynthesis.getVoices().find((item) => item.lang.toLowerCase().startsWith("ja"));
@@ -116,7 +116,11 @@ export default function Home() {
   const quizOptions = useMemo(() => {
     if (currentWordIndex === null) return [];
     const distractors = seededOrder(
-      lesson.words.map((_, index) => index).filter((index) => index !== currentWordIndex),
+      lesson.words.map((_, index) => index).filter((index) =>
+        index !== currentWordIndex &&
+        lesson.words[index].reading !== lesson.words[currentWordIndex].reading &&
+        lesson.words[index].meaning !== lesson.words[currentWordIndex].meaning
+      ),
       lessonIndex * 100 + questionSequence,
     ).slice(0, 3);
     return seededOrder([currentWordIndex, ...distractors], lessonIndex * 1000 + questionSequence + 7);
@@ -213,7 +217,7 @@ export default function Home() {
     setSelectedAnswer(null);
     setQuestionSequence((current) => current + 1);
     setQuizActive(remaining.length > 0);
-    if (nextQueue.length > 0) speak(lesson.words[nextQueue[0]].japanese);
+    if (nextQueue.length > 0) speak(lesson.words[nextQueue[0]].reading);
   };
 
   const answerQuiz = (answerIndex: number) => {
@@ -255,7 +259,7 @@ export default function Home() {
       const nextWordIndex = remainingQueue[0];
       const nextCorrectCount = nextCounts[nextWordIndex] ?? 0;
       if (questionKind(nextWordIndex, nextCorrectCount) === "audio") {
-        speak(lesson.words[nextWordIndex].japanese);
+        speak(lesson.words[nextWordIndex].reading);
       }
     }
   };
@@ -439,8 +443,9 @@ export default function Home() {
                         <span className={`word-status ${done ? "passed" : ""}`}>{done ? <><Check size={13} />已通過</> : "待測驗"}</span>
                         <div className="word-body">
                           <span className="reading">{word.reading}</span><strong>{word.japanese}</strong><span className="meaning">{word.meaning}</span>
+                          {word.reference && <a href={word.reference.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.875rem" }}>核對來源</a>}
                         </div>
-                        <Button variant="ghost" size="icon" className="speak-button" onClick={() => speak(word.japanese)} aria-label={`播放 ${word.japanese} 的發音`}><Volume2 size={20} /></Button>
+                        <Button variant="ghost" size="icon" className="speak-button" onClick={() => speak(word.reading)} aria-label={`播放 ${word.japanese} 的發音`}><Volume2 size={20} /></Button>
                       </article>
                     );
                   })}
@@ -461,7 +466,7 @@ export default function Home() {
                 </div>
 
                 <div className="quiz-prompt">
-                  {currentQuizKind === "audio" && <><p>聽發音，選出正確的中文意思</p><span>{lesson.words[currentWordIndex].reading}</span><button className="quiz-audio" onClick={() => speak(lesson.words[currentWordIndex].japanese)}><Volume2 size={26} />重新播放</button></>}
+                  {currentQuizKind === "audio" && <><p>聽發音，選出正確的中文意思</p><span>{lesson.words[currentWordIndex].reading}</span><button className="quiz-audio" onClick={() => speak(lesson.words[currentWordIndex].reading)}><Volume2 size={26} />重新播放</button></>}
                   {currentQuizKind === "reading" && <><p>選出正確的平假名讀音</p><strong>{lesson.words[currentWordIndex].meaning}</strong></>}
                 </div>
 
@@ -504,7 +509,7 @@ export default function Home() {
                   <article className={`grammar-card ${done ? "done" : ""}`} key={item.title}>
                     <div className="grammar-topline"><span className="grammar-index">0{index + 1}</span><div><h3>{item.title}</h3><p>{item.meaning}</p></div><Checkbox checked={done} onCheckedChange={() => toggleGrammar(index)} aria-label={`${item.title} 已學會`} className="grammar-checkbox" /></div>
                     <div className="pattern"><span>句型</span>{item.pattern}</div>
-                    <div className="example-box"><div><strong>{item.example}</strong><span>{item.reading}</span><p>{item.translation}</p></div><Button variant="ghost" size="icon" onClick={() => speak(item.example)} aria-label="播放例句發音"><Volume2 size={20} /></Button></div>
+                    <div className="example-box"><div><strong>{item.example}</strong><span>{item.reading}</span><p>{item.translation}</p></div><Button variant="ghost" size="icon" onClick={() => speak(item.reading.split(/\s+/).map((part) => part === "は" ? "わ" : part === "へ" ? "え" : part === "を" ? "お" : part).join(""))} aria-label="播放例句發音"><Volume2 size={20} /></Button></div>
                     <button className="grammar-done-button" onClick={() => toggleGrammar(index)} disabled={!wordsDone}>{done ? <><Check size={18} />已完成</> : "我理解了"}</button>
                   </article>
                 );

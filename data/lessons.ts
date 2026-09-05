@@ -2,6 +2,7 @@ export type Word = {
   japanese: string;
   reading: string;
   meaning: string;
+  reference?: { title: string; url: string };
 };
 
 export type Grammar = {
@@ -18,17 +19,19 @@ export type Lesson = {
   grammar: Grammar[];
 };
 
-// 第一階段先提供七天 N5 教材。資料與介面分離，後續可直接擴充 N4～N1。
+// 人工編排的七天入門教材，並非官方 JLPT 題庫。
+// 每題僅有一組讀音與對應詞義；reference 僅標示實際核對過的來源。
+// 其餘詞條沿用原編排，不能宣稱全庫已經字典審核。
 export const n5Lessons: Lesson[] = [
   {
     words: [
-      { japanese: "日", reading: "ひ／にち", meaning: "太陽、日子" },
-      { japanese: "月", reading: "つき／げつ", meaning: "月亮、月份" },
-      { japanese: "火", reading: "ひ／か", meaning: "火" },
-      { japanese: "水", reading: "みず／すい", meaning: "水" },
-      { japanese: "木", reading: "き／もく", meaning: "樹木" },
-      { japanese: "金", reading: "かね／きん", meaning: "金錢、黃金" },
-      { japanese: "土", reading: "つち／ど", meaning: "土、土地" },
+      { japanese: "日曜日", reading: "にちようび", meaning: "星期日", reference: { title: "國際交流基金《まるごと》入門詞彙表", url: "https://marugoto.jpf.go.jp/assets/docs/download/starter_a/MarugotoStarterWordbook_EN.pdf#page=76" } },
+      { japanese: "月", reading: "つき", meaning: "月亮", reference: { title: "Wiktionary 日文詞條", url: "https://en.wiktionary.org/wiki/月#Japanese" } },
+      { japanese: "火", reading: "ひ", meaning: "火", reference: { title: "Wiktionary 日文詞條", url: "https://en.wiktionary.org/wiki/火#Japanese" } },
+      { japanese: "水", reading: "みず", meaning: "水", reference: { title: "Wiktionary 日文詞條", url: "https://en.wiktionary.org/wiki/水#Japanese" } },
+      { japanese: "木", reading: "き", meaning: "樹木", reference: { title: "Wiktionary 日文詞條", url: "https://en.wiktionary.org/wiki/木#Japanese" } },
+      { japanese: "お金", reading: "おかね", meaning: "金錢", reference: { title: "國際交流基金《まるごと》入門詞彙表", url: "https://marugoto.jpf.go.jp/assets/docs/download/starter_a/MarugotoStarterWordbook_EN.pdf#page=74" } },
+      { japanese: "土", reading: "つち", meaning: "土、土壤", reference: { title: "Wiktionary 日文詞條", url: "https://en.wiktionary.org/wiki/土#Japanese" } },
       { japanese: "山", reading: "やま", meaning: "山" },
       { japanese: "川", reading: "かわ", meaning: "河川" },
       { japanese: "田", reading: "た", meaning: "田地" },
@@ -86,9 +89,9 @@ export const n5Lessons: Lesson[] = [
       { japanese: "昼", reading: "ひる", meaning: "中午、白天" },
       { japanese: "夜", reading: "よる", meaning: "晚上" },
       { japanese: "今", reading: "いま", meaning: "現在" },
-      { japanese: "時", reading: "じ", meaning: "點鐘" },
-      { japanese: "分", reading: "ふん／ぷん", meaning: "分鐘" },
-      { japanese: "半", reading: "はん", meaning: "一半、半點" },
+      { japanese: "三時", reading: "さんじ", meaning: "三點鐘", reference: { title: "Wiktionary 日文詞條", url: "https://en.wiktionary.org/wiki/三時#Japanese" } },
+      { japanese: "一分", reading: "いっぷん", meaning: "一分鐘", reference: { title: "Wiktionary 日文量詞表", url: "https://en.wiktionary.org/wiki/分#Japanese" } },
+      { japanese: "三時半", reading: "さんじはん", meaning: "三點半", reference: { title: "國際交流基金《まるごと》時刻與半點用法", url: "https://marugoto.jpf.go.jp/assets/docs/download/starter_a/MarugotoStarterWordbook_EN.pdf#page=78" } },
     ],
     grammar: [
       { title: "～ます", meaning: "動詞的禮貌現在／未來式", pattern: "動詞ます形", example: "毎朝（まいあさ）七時（しちじ）に起（お）きます。", reading: "まいあさ しちじ に おきます", translation: "每天早上七點起床。" },
@@ -104,7 +107,7 @@ export const n5Lessons: Lesson[] = [
       { japanese: "古い", reading: "ふるい", meaning: "舊的" },
       { japanese: "高い", reading: "たかい", meaning: "高的、昂貴的" },
       { japanese: "安い", reading: "やすい", meaning: "便宜的" },
-      { japanese: "良い", reading: "いい／よい", meaning: "好的" },
+      { japanese: "良い", reading: "よい", meaning: "好的", reference: { title: "Wiktionary 日文詞條", url: "https://en.wiktionary.org/wiki/良い#Japanese" } },
       { japanese: "悪い", reading: "わるい", meaning: "不好的" },
       { japanese: "静か", reading: "しずか", meaning: "安靜的" },
       { japanese: "元気", reading: "げんき", meaning: "有精神、健康" },
