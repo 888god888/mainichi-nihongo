@@ -1,4 +1,4 @@
-const CACHE = "mainichi-nihongo-v4-random-grammar";
+const CACHE = "mainichi-nihongo-v5-30-lessons";
 const APP_SHELL = ["./", "./manifest.webmanifest", "./favicon.svg", "./apple-touch-icon.png", "./icon-512.png"];
 
 self.addEventListener("install", (event) => {

@@ -25,6 +25,7 @@ import { normalizeUsername, usernameToInternalEmail } from "@/lib/auth";
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 
 type ProgressRow = {
+  lesson_number: number;
   completed_words: number[];
   completed_grammar: number[];
   completed: boolean;
@@ -94,6 +95,7 @@ function questionKind(wordIndex: number, correctCount: number): QuizKind {
 
 export default function Home() {
   const [today] = useState(() => new Date());
+  const [lessonIndex, setLessonIndex] = useState(() => dayOfYear(today) % n5Lessons.length);
   const [user, setUser] = useState<User | null>(null);
   const [username, setUsername] = useState("");
   const [authLoading, setAuthLoading] = useState(true);
@@ -122,7 +124,6 @@ export default function Home() {
   const todayCompletedRef = useRef(false);
 
   const date = localDateKey(today);
-  const lessonIndex = dayOfYear(today) % n5Lessons.length;
   const lesson = n5Lessons[lessonIndex];
   const completeCount = checkedWords.length + checkedGrammar.length;
   const wordsDone = checkedWords.length === lesson.words.length;
@@ -151,7 +152,7 @@ export default function Home() {
       supabase.from("profiles").select("username").eq("id", activeUser.id).single(),
       supabase
         .from("daily_progress")
-        .select("completed_words, completed_grammar, completed")
+        .select("lesson_number, completed_words, completed_grammar, completed")
         .eq("user_id", activeUser.id)
         .eq("lesson_date", date)
         .maybeSingle<ProgressRow>(),
@@ -164,6 +165,10 @@ export default function Home() {
     ]);
 
     setUsername(profile?.username ?? activeUser.user_metadata?.username ?? "學習者");
+    const savedLessonIndex = (progress?.lesson_number ?? 0) - 1;
+    setLessonIndex(savedLessonIndex >= 0 && savedLessonIndex < n5Lessons.length
+      ? savedLessonIndex
+      : dayOfYear(today) % n5Lessons.length);
     setCheckedWords(progress?.completed_words ?? []);
     setCheckedGrammar(progress?.completed_grammar ?? []);
     setQuizActive(false);
