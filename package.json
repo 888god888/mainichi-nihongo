@@ -5,7 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "vocab:fetch": "node scripts/vocab/fetch-jmdict.mjs",
+    "vocab:build": "node scripts/vocab/build-vocab.mjs --level n5",
+    "vocab:check": "node scripts/vocab/build-vocab.mjs --level n5 --check"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.112.4",
@@ -24,6 +29,7 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "tailwindcss": "4.2.1",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vitest": "5.0.3"
   }
 }

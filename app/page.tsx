@@ -7,6 +7,7 @@ import {
   Brain,
   Check,
   Cloud,
+  CloudOff,
   Flame,
   LoaderCircle,
   LockKeyhole,
@@ -22,6 +23,8 @@ import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import { n5Lessons } from "@/data/lessons";
 import { normalizeUsername, usernameToInternalEmail } from "@/lib/auth";
+import { calculateStreak, localDateKey } from "@/lib/dates";
+import { nextLessonIndex } from "@/lib/lesson-order";
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 
 type ProgressRow = {
@@ -35,17 +38,6 @@ type QuizKind = "reading" | "audio";
 type QuizFeedback = "correct" | "wrong" | null;
 type GrammarQuizKind = "meaning" | "translation" | "pattern";
 
-const pad = (value: number) => String(value).padStart(2, "0");
-
-function localDateKey(date: Date) {
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
-}
-
-function dayOfYear(date: Date) {
-  const start = new Date(date.getFullYear(), 0, 0);
-  return Math.floor((date.getTime() - start.getTime()) / 86400000);
-}
-
 function speak(text: string) {
   if (!("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
@@ -55,19 +47,6 @@ function speak(text: string) {
   const voice = window.speechSynthesis.getVoices().find((item) => item.lang.toLowerCase().startsWith("ja"));
   if (voice) utterance.voice = voice;
   window.speechSynthesis.speak(utterance);
-}
-
-function calculateStreak(completedDates: string[], today: Date) {
-  const dates = new Set(completedDates);
-  const cursor = new Date(today);
-  if (!dates.has(localDateKey(cursor))) cursor.setDate(cursor.getDate() - 1);
-
-  let streak = 0;
-  while (dates.has(localDateKey(cursor))) {
-    streak += 1;
-    cursor.setDate(cursor.getDate() - 1);
-  }
-  return streak;
 }
 
 function shuffle(values: number[]) {
@@ -94,13 +73,15 @@ function questionKind(wordIndex: number, correctCount: number): QuizKind {
 }
 
 export default function Home() {
-  const [today] = useState(() => new Date());
-  const [lessonIndex, setLessonIndex] = useState(() => dayOfYear(today) % n5Lessons.length);
+  const [today, setToday] = useState(() => new Date());
+  const [lessonIndex, setLessonIndex] = useState(0);
   const [user, setUser] = useState<User | null>(null);
   const [username, setUsername] = useState("");
   const [authLoading, setAuthLoading] = useState(true);
   const [dataLoading, setDataLoading] = useState(false);
   const [syncing, setSyncing] = useState(false);
+  const [syncError, setSyncError] = useState(false);
+  const [loadError, setLoadError] = useState(false);
   const [mode, setMode] = useState<"login" | "register">("login");
   const [accountInput, setAccountInput] = useState("");
   const [password, setPassword] = useState("");
@@ -125,6 +106,7 @@ export default function Home() {
 
   const date = localDateKey(today);
   const lesson = n5Lessons[lessonIndex];
+  const lessonTotal = lesson.words.length + lesson.grammar.length;
   const completeCount = checkedWords.length + checkedGrammar.length;
   const wordsDone = checkedWords.length === lesson.words.length;
   const lessonDone = wordsDone && checkedGrammar.length === lesson.grammar.length;
@@ -148,7 +130,8 @@ export default function Home() {
 
   const loadLearningData = useCallback(async (activeUser: User) => {
     setDataLoading(true);
-    const [{ data: profile }, { data: progress }, { data: historyRows }] = await Promise.all([
+    setLoadError(false);
+    const [{ data: profile }, { data: progress, error: progressError }, { data: historyRows, error: historyError }] = await Promise.all([
       supabase.from("profiles").select("username").eq("id", activeUser.id).single(),
       supabase
         .from("daily_progress")
@@ -158,17 +141,24 @@ export default function Home() {
         .maybeSingle<ProgressRow>(),
       supabase
         .from("daily_progress")
-        .select("lesson_date, completed")
+        .select("lesson_date, completed, lesson_number")
         .eq("user_id", activeUser.id)
         .order("lesson_date", { ascending: false })
         .limit(366),
     ]);
 
+    if (progressError || historyError) {
+      // 讀取失敗不能當成「今天沒有進度」，否則下一次存檔會用空陣列覆蓋雲端已完成的內容。
+      setLoadError(true);
+      setDataLoading(false);
+      return;
+    }
+
     setUsername(profile?.username ?? activeUser.user_metadata?.username ?? "學習者");
     const savedLessonIndex = (progress?.lesson_number ?? 0) - 1;
     setLessonIndex(savedLessonIndex >= 0 && savedLessonIndex < n5Lessons.length
       ? savedLessonIndex
-      : dayOfYear(today) % n5Lessons.length);
+      : nextLessonIndex(historyRows ?? [], n5Lessons.length));
     setCheckedWords(progress?.completed_words ?? []);
     setCheckedGrammar(progress?.completed_grammar ?? []);
     setQuizActive(false);
@@ -187,6 +177,16 @@ export default function Home() {
     setDataLoading(false);
   }, [date, today]);
 
+  // PWA 常在背景停留過夜；回到前景時若日期已變，就重新計算「今天」並重載進度。
+  useEffect(() => {
+    const refreshDate = () => {
+      if (document.visibilityState !== "visible") return;
+      setToday((current) => (localDateKey(new Date()) === localDateKey(current) ? current : new Date()));
+    };
+    document.addEventListener("visibilitychange", refreshDate);
+    return () => document.removeEventListener("visibilitychange", refreshDate);
+  }, []);
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       const activeUser = data.session?.user ?? null;
@@ -200,6 +200,8 @@ export default function Home() {
       setUser(activeUser);
       if (activeUser) void loadLearningData(activeUser);
       else {
+        setLoadError(false);
+        setSyncError(false);
         setUsername("");
         setCheckedWords([]);
         setCheckedGrammar([]);
@@ -227,7 +229,7 @@ export default function Home() {
   }, [loadLearningData]);
 
   const saveProgress = async (words: number[], grammar: number[]) => {
-    if (!user) return;
+    if (!user || loadError) return;
     setSyncing(true);
     const completed = words.length === lesson.words.length && grammar.length === lesson.grammar.length;
     const { error } = await supabase.from("daily_progress").upsert({
@@ -239,6 +241,7 @@ export default function Home() {
       completed,
       updated_at: new Date().toISOString(),
     });
+    setSyncError(Boolean(error));
     if (!error && !hasTodayProgressRef.current) {
       hasTodayProgressRef.current = true;
       setLearningDays((current) => current + 1);
@@ -468,17 +471,23 @@ export default function Home() {
       <section className="daily-progress" aria-label="今日學習進度">
         <div className="progress-copy">
           <div><span className="level-badge">JLPT N5</span><span className="lesson-label">第（だい）{lessonIndex + 1}課（か）</span></div>
-          <div className="sync-state">{syncing ? <><LoaderCircle className="spin" />同步中</> : <><Cloud />已同步</>}<strong>{completeCount} / 13</strong></div>
+          <div className="sync-state">{syncing ? <><LoaderCircle className="spin" />同步中</> : syncError ? <><CloudOff />同步失敗</> : <><Cloud />已同步</>}<strong>{completeCount} / {lessonTotal}</strong></div>
         </div>
-        <Progress value={(completeCount / 13) * 100} className="h-2.5 bg-[#e8dfd2] [&>div]:bg-[#d9544d]" />
+        <Progress value={(completeCount / lessonTotal) * 100} className="h-2.5 bg-[#e8dfd2] [&>div]:bg-[#d9544d]" />
         <div className="progress-bottom">
-          <p>{lessonDone ? "今日（きょう）の任務（にんむ）、完成（かんせい）！" : wordsDone ? "單字測驗通過，進入文法練習吧。" : "先學習 10 個單字，通過測驗後再完成 3 個文法。"}</p>
+          <p>{lessonDone ? "今日（きょう）の任務（にんむ）、完成（かんせい）！" : wordsDone ? "單字測驗通過，進入文法練習吧。" : lesson.grammar.length > 0 ? `先學習 ${lesson.words.length} 個單字，通過測驗後再完成 ${lesson.grammar.length} 個文法。` : `學習今天的 ${lesson.words.length} 個單字，通過測驗就完成今日任務。`}</p>
           <div className="progress-stats"><span><BookOpenText size={15} />累計學習 {learningDays} 天</span><span><Flame size={16} />連續完成 {streak} 天</span></div>
         </div>
       </section>
 
       {dataLoading ? (
         <section className="data-loading"><LoaderCircle className="spin" />正在載入你的學習紀錄…</section>
+      ) : loadError ? (
+        <section className="data-loading error" role="alert">
+          <CloudOff />
+          <p>無法載入學習紀錄，為避免覆蓋雲端進度，暫時不能作答。請確認網路後重試。</p>
+          <button className="quiz-launch" onClick={() => user && void loadLearningData(user)}>重新載入</button>
+        </section>
       ) : (
         <>
           {lessonDone && (
@@ -517,7 +526,7 @@ export default function Home() {
                   })}
                 </div>
                 <button className="quiz-launch" onClick={startQuiz} disabled={wordsDone}>
-                  {wordsDone ? <><Check size={19} />10 個單字全部通過</> : <><Play size={19} fill="currentColor" />{checkedWords.length > 0 ? "繼續單字測驗" : "開始單字測驗"}</>}
+                  {wordsDone ? <><Check size={19} />{lesson.words.length} 個單字全部通過</> : <><Play size={19} fill="currentColor" />{checkedWords.length > 0 ? "繼續單字測驗" : "開始單字測驗"}</>}
                 </button>
               </>
             ) : currentWordIndex !== null ? (
@@ -561,6 +570,7 @@ export default function Home() {
             ) : null}
           </section>
 
+          {lesson.grammar.length > 0 && (
           <section className={`lesson-section grammar-section ${!wordsDone ? "locked" : ""}`}>
             <div className="section-heading">
               <div className="section-number">二</div>
@@ -603,6 +613,7 @@ export default function Home() {
               </section>
             )}
           </section>
+          )}
         </>
       )}
 
@@ -616,6 +627,9 @@ export default function Home() {
       </section>
 
       <footer><BookOpenText size={15} />毎日（まいにち）少（すこ）しずつ、上手（じょうず）になる。</footer>
+      <p style={{ margin: "0 auto 28px", maxWidth: 560, padding: "0 16px", textAlign: "center", fontSize: "0.75rem", lineHeight: 1.7, opacity: 0.7 }}>
+        單字資料：JMdict／EDRDG 與 OpenJLPT（CC BY-SA 4.0）；JLPT 等級依 Jonathan Waller 清單（CC BY），為非官方整理；例句：Tatoeba（CC BY 2.0 FR）。
+      </p>
     </main>
   );
 }

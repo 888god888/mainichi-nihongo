@@ -239,3 +239,7 @@ footer { display: flex; justify-content: center; align-items: center; gap: 6px; 
 }
 
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
+
+.data-loading.error { flex-direction: column; text-align: center; padding: 0 24px; }
+.data-loading.error p { margin: 0; line-height: 1.7; }
+.data-loading.error .quiz-launch { width: auto; padding: 12px 28px; }

@@ -1,0 +1,1802 @@
+[
+ {
+  "japanese": "日曜日",
+  "reading": "にちようび",
+  "meaning": "星期日",
+  "lesson": 1
+ },
+ {
+  "japanese": "月",
+  "reading": "つき",
+  "meaning": "月亮",
+  "lesson": 1
+ },
+ {
+  "japanese": "火",
+  "reading": "ひ",
+  "meaning": "火",
+  "lesson": 1
+ },
+ {
+  "japanese": "水",
+  "reading": "みず",
+  "meaning": "水",
+  "lesson": 1
+ },
+ {
+  "japanese": "木",
+  "reading": "き",
+  "meaning": "樹木",
+  "lesson": 1
+ },
+ {
+  "japanese": "お金",
+  "reading": "おかね",
+  "meaning": "金錢",
+  "lesson": 1
+ },
+ {
+  "japanese": "土",
+  "reading": "つち",
+  "meaning": "土、土壤",
+  "lesson": 1
+ },
+ {
+  "japanese": "山",
+  "reading": "やま",
+  "meaning": "山",
+  "lesson": 1
+ },
+ {
+  "japanese": "川",
+  "reading": "かわ",
+  "meaning": "河川",
+  "lesson": 1
+ },
+ {
+  "japanese": "田",
+  "reading": "た",
+  "meaning": "田地",
+  "lesson": 1
+ },
+ {
+  "japanese": "人",
+  "reading": "ひと",
+  "meaning": "人",
+  "lesson": 2
+ },
+ {
+  "japanese": "女",
+  "reading": "おんな",
+  "meaning": "女性",
+  "lesson": 2
+ },
+ {
+  "japanese": "男",
+  "reading": "おとこ",
+  "meaning": "男性",
+  "lesson": 2
+ },
+ {
+  "japanese": "子供",
+  "reading": "こども",
+  "meaning": "小孩",
+  "lesson": 2
+ },
+ {
+  "japanese": "学生",
+  "reading": "がくせい",
+  "meaning": "學生",
+  "lesson": 2
+ },
+ {
+  "japanese": "先生",
+  "reading": "せんせい",
+  "meaning": "老師",
+  "lesson": 2
+ },
+ {
+  "japanese": "会社員",
+  "reading": "かいしゃいん",
+  "meaning": "公司職員",
+  "lesson": 2
+ },
+ {
+  "japanese": "日本人",
+  "reading": "にほんじん",
+  "meaning": "日本人",
+  "lesson": 2
+ },
+ {
+  "japanese": "台湾人",
+  "reading": "たいわんじん",
+  "meaning": "台灣人",
+  "lesson": 2
+ },
+ {
+  "japanese": "友達",
+  "reading": "ともだち",
+  "meaning": "朋友",
+  "lesson": 2
+ },
+ {
+  "japanese": "食べる",
+  "reading": "たべる",
+  "meaning": "吃",
+  "lesson": 3
+ },
+ {
+  "japanese": "飲む",
+  "reading": "のむ",
+  "meaning": "喝",
+  "lesson": 3
+ },
+ {
+  "japanese": "見る",
+  "reading": "みる",
+  "meaning": "看",
+  "lesson": 3
+ },
+ {
+  "japanese": "聞く",
+  "reading": "きく",
+  "meaning": "聽、詢問",
+  "lesson": 3
+ },
+ {
+  "japanese": "読む",
+  "reading": "よむ",
+  "meaning": "閱讀",
+  "lesson": 3
+ },
+ {
+  "japanese": "書く",
+  "reading": "かく",
+  "meaning": "寫",
+  "lesson": 3
+ },
+ {
+  "japanese": "話す",
+  "reading": "はなす",
+  "meaning": "說話",
+  "lesson": 3
+ },
+ {
+  "japanese": "行く",
+  "reading": "いく",
+  "meaning": "去",
+  "lesson": 3
+ },
+ {
+  "japanese": "来る",
+  "reading": "くる",
+  "meaning": "來",
+  "lesson": 3
+ },
+ {
+  "japanese": "帰る",
+  "reading": "かえる",
+  "meaning": "回去、回家",
+  "lesson": 3
+ },
+ {
+  "japanese": "今日",
+  "reading": "きょう",
+  "meaning": "今天",
+  "lesson": 4
+ },
+ {
+  "japanese": "明日",
+  "reading": "あした",
+  "meaning": "明天",
+  "lesson": 4
+ },
+ {
+  "japanese": "昨日",
+  "reading": "きのう",
+  "meaning": "昨天",
+  "lesson": 4
+ },
+ {
+  "japanese": "朝",
+  "reading": "あさ",
+  "meaning": "早上",
+  "lesson": 4
+ },
+ {
+  "japanese": "昼",
+  "reading": "ひる",
+  "meaning": "中午、白天",
+  "lesson": 4
+ },
+ {
+  "japanese": "夜",
+  "reading": "よる",
+  "meaning": "晚上",
+  "lesson": 4
+ },
+ {
+  "japanese": "今",
+  "reading": "いま",
+  "meaning": "現在",
+  "lesson": 4
+ },
+ {
+  "japanese": "三時",
+  "reading": "さんじ",
+  "meaning": "三點鐘",
+  "lesson": 4
+ },
+ {
+  "japanese": "一分",
+  "reading": "いっぷん",
+  "meaning": "一分鐘",
+  "lesson": 4
+ },
+ {
+  "japanese": "三時半",
+  "reading": "さんじはん",
+  "meaning": "三點半",
+  "lesson": 4
+ },
+ {
+  "japanese": "大きい",
+  "reading": "おおきい",
+  "meaning": "大的",
+  "lesson": 5
+ },
+ {
+  "japanese": "小さい",
+  "reading": "ちいさい",
+  "meaning": "小的",
+  "lesson": 5
+ },
+ {
+  "japanese": "新しい",
+  "reading": "あたらしい",
+  "meaning": "新的",
+  "lesson": 5
+ },
+ {
+  "japanese": "古い",
+  "reading": "ふるい",
+  "meaning": "舊的",
+  "lesson": 5
+ },
+ {
+  "japanese": "高い",
+  "reading": "たかい",
+  "meaning": "高的、昂貴的",
+  "lesson": 5
+ },
+ {
+  "japanese": "安い",
+  "reading": "やすい",
+  "meaning": "便宜的",
+  "lesson": 5
+ },
+ {
+  "japanese": "良い",
+  "reading": "よい",
+  "meaning": "好的",
+  "lesson": 5
+ },
+ {
+  "japanese": "悪い",
+  "reading": "わるい",
+  "meaning": "不好的",
+  "lesson": 5
+ },
+ {
+  "japanese": "静か",
+  "reading": "しずか",
+  "meaning": "安靜的",
+  "lesson": 5
+ },
+ {
+  "japanese": "元気",
+  "reading": "げんき",
+  "meaning": "有精神、健康",
+  "lesson": 5
+ },
+ {
+  "japanese": "学校",
+  "reading": "がっこう",
+  "meaning": "學校",
+  "lesson": 6
+ },
+ {
+  "japanese": "会社",
+  "reading": "かいしゃ",
+  "meaning": "公司",
+  "lesson": 6
+ },
+ {
+  "japanese": "駅",
+  "reading": "えき",
+  "meaning": "車站",
+  "lesson": 6
+ },
+ {
+  "japanese": "病院",
+  "reading": "びょういん",
+  "meaning": "醫院",
+  "lesson": 6
+ },
+ {
+  "japanese": "銀行",
+  "reading": "ぎんこう",
+  "meaning": "銀行",
+  "lesson": 6
+ },
+ {
+  "japanese": "店",
+  "reading": "みせ",
+  "meaning": "商店",
+  "lesson": 6
+ },
+ {
+  "japanese": "家",
+  "reading": "いえ",
+  "meaning": "家、房子",
+  "lesson": 6
+ },
+ {
+  "japanese": "部屋",
+  "reading": "へや",
+  "meaning": "房間",
+  "lesson": 6
+ },
+ {
+  "japanese": "入口",
+  "reading": "いりぐち",
+  "meaning": "入口",
+  "lesson": 6
+ },
+ {
+  "japanese": "出口",
+  "reading": "でぐち",
+  "meaning": "出口",
+  "lesson": 6
+ },
+ {
+  "japanese": "一つ",
+  "reading": "ひとつ",
+  "meaning": "一個",
+  "lesson": 7
+ },
+ {
+  "japanese": "二つ",
+  "reading": "ふたつ",
+  "meaning": "兩個",
+  "lesson": 7
+ },
+ {
+  "japanese": "三つ",
+  "reading": "みっつ",
+  "meaning": "三個",
+  "lesson": 7
+ },
+ {
+  "japanese": "一人",
+  "reading": "ひとり",
+  "meaning": "一個人",
+  "lesson": 7
+ },
+ {
+  "japanese": "二人",
+  "reading": "ふたり",
+  "meaning": "兩個人",
+  "lesson": 7
+ },
+ {
+  "japanese": "一枚",
+  "reading": "いちまい",
+  "meaning": "一張（扁平物）",
+  "lesson": 7
+ },
+ {
+  "japanese": "一本",
+  "reading": "いっぽん",
+  "meaning": "一支（細長物）",
+  "lesson": 7
+ },
+ {
+  "japanese": "一台",
+  "reading": "いちだい",
+  "meaning": "一台（機械、車）",
+  "lesson": 7
+ },
+ {
+  "japanese": "何人",
+  "reading": "なんにん",
+  "meaning": "幾個人",
+  "lesson": 7
+ },
+ {
+  "japanese": "全部",
+  "reading": "ぜんぶ",
+  "meaning": "全部",
+  "lesson": 7
+ },
+ {
+  "japanese": "椅子",
+  "reading": "いす",
+  "meaning": "椅子",
+  "lesson": 8
+ },
+ {
+  "japanese": "机",
+  "reading": "つくえ",
+  "meaning": "桌子",
+  "lesson": 8
+ },
+ {
+  "japanese": "鉛筆",
+  "reading": "えんぴつ",
+  "meaning": "鉛筆",
+  "lesson": 8
+ },
+ {
+  "japanese": "ペン",
+  "reading": "ぺん",
+  "meaning": "筆",
+  "lesson": 8
+ },
+ {
+  "japanese": "消しゴム",
+  "reading": "けしごむ",
+  "meaning": "橡皮擦",
+  "lesson": 8
+ },
+ {
+  "japanese": "ノート",
+  "reading": "のーと",
+  "meaning": "筆記本",
+  "lesson": 8
+ },
+ {
+  "japanese": "辞書",
+  "reading": "じしょ",
+  "meaning": "字典",
+  "lesson": 8
+ },
+ {
+  "japanese": "携帯電話",
+  "reading": "けいたいでんわ",
+  "meaning": "手機",
+  "lesson": 8
+ },
+ {
+  "japanese": "教科書",
+  "reading": "きょうかしょ",
+  "meaning": "教科書",
+  "lesson": 8
+ },
+ {
+  "japanese": "コンピューター",
+  "reading": "こんぴゅーたー",
+  "meaning": "電腦",
+  "lesson": 8
+ },
+ {
+  "japanese": "父",
+  "reading": "ちち",
+  "meaning": "父親（稱自己的）",
+  "lesson": 9
+ },
+ {
+  "japanese": "母",
+  "reading": "はは",
+  "meaning": "母親（稱自己的）",
+  "lesson": 9
+ },
+ {
+  "japanese": "兄",
+  "reading": "あに",
+  "meaning": "哥哥（稱自己的）",
+  "lesson": 9
+ },
+ {
+  "japanese": "姉",
+  "reading": "あね",
+  "meaning": "姊姊（稱自己的）",
+  "lesson": 9
+ },
+ {
+  "japanese": "弟",
+  "reading": "おとうと",
+  "meaning": "弟弟",
+  "lesson": 9
+ },
+ {
+  "japanese": "妹",
+  "reading": "いもうと",
+  "meaning": "妹妹",
+  "lesson": 9
+ },
+ {
+  "japanese": "夫",
+  "reading": "おっと",
+  "meaning": "丈夫（稱自己的）",
+  "lesson": 9
+ },
+ {
+  "japanese": "妻",
+  "reading": "つま",
+  "meaning": "妻子（稱自己的）",
+  "lesson": 9
+ },
+ {
+  "japanese": "両親",
+  "reading": "りょうしん",
+  "meaning": "父母、雙親",
+  "lesson": 9
+ },
+ {
+  "japanese": "家族",
+  "reading": "かぞく",
+  "meaning": "家人、家庭",
+  "lesson": 9
+ },
+ {
+  "japanese": "ご飯",
+  "reading": "ごはん",
+  "meaning": "飯、餐",
+  "lesson": 10
+ },
+ {
+  "japanese": "パン",
+  "reading": "ぱん",
+  "meaning": "麵包",
+  "lesson": 10
+ },
+ {
+  "japanese": "肉",
+  "reading": "にく",
+  "meaning": "肉",
+  "lesson": 10
+ },
+ {
+  "japanese": "魚",
+  "reading": "さかな",
+  "meaning": "魚",
+  "lesson": 10
+ },
+ {
+  "japanese": "野菜",
+  "reading": "やさい",
+  "meaning": "蔬菜",
+  "lesson": 10
+ },
+ {
+  "japanese": "果物",
+  "reading": "くだもの",
+  "meaning": "水果",
+  "lesson": 10
+ },
+ {
+  "japanese": "卵",
+  "reading": "たまご",
+  "meaning": "蛋",
+  "lesson": 10
+ },
+ {
+  "japanese": "牛乳",
+  "reading": "ぎゅうにゅう",
+  "meaning": "牛奶",
+  "lesson": 10
+ },
+ {
+  "japanese": "お茶",
+  "reading": "おちゃ",
+  "meaning": "茶",
+  "lesson": 10
+ },
+ {
+  "japanese": "コーヒー",
+  "reading": "こーひー",
+  "meaning": "咖啡",
+  "lesson": 10
+ },
+ {
+  "japanese": "起きる",
+  "reading": "おきる",
+  "meaning": "起床",
+  "lesson": 11
+ },
+ {
+  "japanese": "寝る",
+  "reading": "ねる",
+  "meaning": "睡覺",
+  "lesson": 11
+ },
+ {
+  "japanese": "働く",
+  "reading": "はたらく",
+  "meaning": "工作",
+  "lesson": 11
+ },
+ {
+  "japanese": "勉強する",
+  "reading": "べんきょうする",
+  "meaning": "學習",
+  "lesson": 11
+ },
+ {
+  "japanese": "買う",
+  "reading": "かう",
+  "meaning": "購買",
+  "lesson": 11
+ },
+ {
+  "japanese": "会う",
+  "reading": "あう",
+  "meaning": "見面",
+  "lesson": 11
+ },
+ {
+  "japanese": "待つ",
+  "reading": "まつ",
+  "meaning": "等待",
+  "lesson": 11
+ },
+ {
+  "japanese": "使う",
+  "reading": "つかう",
+  "meaning": "使用",
+  "lesson": 11
+ },
+ {
+  "japanese": "作る",
+  "reading": "つくる",
+  "meaning": "製作",
+  "lesson": 11
+ },
+ {
+  "japanese": "休む",
+  "reading": "やすむ",
+  "meaning": "休息、請假",
+  "lesson": 11
+ },
+ {
+  "japanese": "台所",
+  "reading": "だいどころ",
+  "meaning": "廚房",
+  "lesson": 12
+ },
+ {
+  "japanese": "玄関",
+  "reading": "げんかん",
+  "meaning": "玄關",
+  "lesson": 12
+ },
+ {
+  "japanese": "お風呂",
+  "reading": "おふろ",
+  "meaning": "浴室、泡澡",
+  "lesson": 12
+ },
+ {
+  "japanese": "トイレ",
+  "reading": "といれ",
+  "meaning": "廁所",
+  "lesson": 12
+ },
+ {
+  "japanese": "窓",
+  "reading": "まど",
+  "meaning": "窗戶",
+  "lesson": 12
+ },
+ {
+  "japanese": "ドア",
+  "reading": "どあ",
+  "meaning": "門",
+  "lesson": 12
+ },
+ {
+  "japanese": "冷蔵庫",
+  "reading": "れいぞうこ",
+  "meaning": "冰箱",
+  "lesson": 12
+ },
+ {
+  "japanese": "電話",
+  "reading": "でんわ",
+  "meaning": "電話",
+  "lesson": 12
+ },
+ {
+  "japanese": "テレビ",
+  "reading": "てれび",
+  "meaning": "電視",
+  "lesson": 12
+ },
+ {
+  "japanese": "時計",
+  "reading": "とけい",
+  "meaning": "時鐘、手錶",
+  "lesson": 12
+ },
+ {
+  "japanese": "上",
+  "reading": "うえ",
+  "meaning": "上面",
+  "lesson": 13
+ },
+ {
+  "japanese": "下",
+  "reading": "した",
+  "meaning": "下面",
+  "lesson": 13
+ },
+ {
+  "japanese": "前",
+  "reading": "まえ",
+  "meaning": "前面",
+  "lesson": 13
+ },
+ {
+  "japanese": "後ろ",
+  "reading": "うしろ",
+  "meaning": "後面",
+  "lesson": 13
+ },
+ {
+  "japanese": "右",
+  "reading": "みぎ",
+  "meaning": "右邊",
+  "lesson": 13
+ },
+ {
+  "japanese": "左",
+  "reading": "ひだり",
+  "meaning": "左邊",
+  "lesson": 13
+ },
+ {
+  "japanese": "中",
+  "reading": "なか",
+  "meaning": "裡面",
+  "lesson": 13
+ },
+ {
+  "japanese": "外",
+  "reading": "そと",
+  "meaning": "外面",
+  "lesson": 13
+ },
+ {
+  "japanese": "隣",
+  "reading": "となり",
+  "meaning": "隔壁、旁邊",
+  "lesson": 13
+ },
+ {
+  "japanese": "近く",
+  "reading": "ちかく",
+  "meaning": "附近",
+  "lesson": 13
+ },
+ {
+  "japanese": "電車",
+  "reading": "でんしゃ",
+  "meaning": "電車",
+  "lesson": 14
+ },
+ {
+  "japanese": "地下鉄",
+  "reading": "ちかてつ",
+  "meaning": "地下鐵",
+  "lesson": 14
+ },
+ {
+  "japanese": "バス",
+  "reading": "ばす",
+  "meaning": "公車",
+  "lesson": 14
+ },
+ {
+  "japanese": "車",
+  "reading": "くるま",
+  "meaning": "汽車",
+  "lesson": 14
+ },
+ {
+  "japanese": "自転車",
+  "reading": "じてんしゃ",
+  "meaning": "腳踏車",
+  "lesson": 14
+ },
+ {
+  "japanese": "飛行機",
+  "reading": "ひこうき",
+  "meaning": "飛機",
+  "lesson": 14
+ },
+ {
+  "japanese": "船",
+  "reading": "ふね",
+  "meaning": "船",
+  "lesson": 14
+ },
+ {
+  "japanese": "歩く",
+  "reading": "あるく",
+  "meaning": "步行",
+  "lesson": 14
+ },
+ {
+  "japanese": "乗る",
+  "reading": "のる",
+  "meaning": "搭乘",
+  "lesson": 14
+ },
+ {
+  "japanese": "降りる",
+  "reading": "おりる",
+  "meaning": "下車",
+  "lesson": 14
+ },
+ {
+  "japanese": "図書館",
+  "reading": "としょかん",
+  "meaning": "圖書館",
+  "lesson": 15
+ },
+ {
+  "japanese": "郵便局",
+  "reading": "ゆうびんきょく",
+  "meaning": "郵局",
+  "lesson": 15
+ },
+ {
+  "japanese": "公園",
+  "reading": "こうえん",
+  "meaning": "公園",
+  "lesson": 15
+ },
+ {
+  "japanese": "空港",
+  "reading": "くうこう",
+  "meaning": "機場",
+  "lesson": 15
+ },
+ {
+  "japanese": "交番",
+  "reading": "こうばん",
+  "meaning": "派出所",
+  "lesson": 15
+ },
+ {
+  "japanese": "ホテル",
+  "reading": "ほてる",
+  "meaning": "飯店",
+  "lesson": 15
+ },
+ {
+  "japanese": "レストラン",
+  "reading": "れすとらん",
+  "meaning": "餐廳",
+  "lesson": 15
+ },
+ {
+  "japanese": "喫茶店",
+  "reading": "きっさてん",
+  "meaning": "咖啡店",
+  "lesson": 15
+ },
+ {
+  "japanese": "映画館",
+  "reading": "えいがかん",
+  "meaning": "電影院",
+  "lesson": 15
+ },
+ {
+  "japanese": "スーパー",
+  "reading": "すーぱー",
+  "meaning": "超級市場",
+  "lesson": 15
+ },
+ {
+  "japanese": "春",
+  "reading": "はる",
+  "meaning": "春天",
+  "lesson": 16
+ },
+ {
+  "japanese": "夏",
+  "reading": "なつ",
+  "meaning": "夏天",
+  "lesson": 16
+ },
+ {
+  "japanese": "秋",
+  "reading": "あき",
+  "meaning": "秋天",
+  "lesson": 16
+ },
+ {
+  "japanese": "冬",
+  "reading": "ふゆ",
+  "meaning": "冬天",
+  "lesson": 16
+ },
+ {
+  "japanese": "天気",
+  "reading": "てんき",
+  "meaning": "天氣",
+  "lesson": 16
+ },
+ {
+  "japanese": "晴れ",
+  "reading": "はれ",
+  "meaning": "晴天",
+  "lesson": 16
+ },
+ {
+  "japanese": "雨",
+  "reading": "あめ",
+  "meaning": "雨",
+  "lesson": 16
+ },
+ {
+  "japanese": "雪",
+  "reading": "ゆき",
+  "meaning": "雪",
+  "lesson": 16
+ },
+ {
+  "japanese": "暑い",
+  "reading": "あつい",
+  "meaning": "炎熱的",
+  "lesson": 16
+ },
+ {
+  "japanese": "寒い",
+  "reading": "さむい",
+  "meaning": "寒冷的",
+  "lesson": 16
+ },
+ {
+  "japanese": "面白い",
+  "reading": "おもしろい",
+  "meaning": "有趣的",
+  "lesson": 17
+ },
+ {
+  "japanese": "難しい",
+  "reading": "むずかしい",
+  "meaning": "困難的",
+  "lesson": 17
+ },
+ {
+  "japanese": "易しい",
+  "reading": "やさしい",
+  "meaning": "容易的",
+  "lesson": 17
+ },
+ {
+  "japanese": "忙しい",
+  "reading": "いそがしい",
+  "meaning": "忙碌的",
+  "lesson": 17
+ },
+ {
+  "japanese": "楽しい",
+  "reading": "たのしい",
+  "meaning": "快樂、有趣的",
+  "lesson": 17
+ },
+ {
+  "japanese": "美味しい",
+  "reading": "おいしい",
+  "meaning": "好吃的",
+  "lesson": 17
+ },
+ {
+  "japanese": "早い",
+  "reading": "はやい",
+  "meaning": "早的",
+  "lesson": 17
+ },
+ {
+  "japanese": "遅い",
+  "reading": "おそい",
+  "meaning": "晚的、慢的",
+  "lesson": 17
+ },
+ {
+  "japanese": "明るい",
+  "reading": "あかるい",
+  "meaning": "明亮的",
+  "lesson": 17
+ },
+ {
+  "japanese": "暗い",
+  "reading": "くらい",
+  "meaning": "昏暗的",
+  "lesson": 17
+ },
+ {
+  "japanese": "頭",
+  "reading": "あたま",
+  "meaning": "頭",
+  "lesson": 18
+ },
+ {
+  "japanese": "目",
+  "reading": "め",
+  "meaning": "眼睛",
+  "lesson": 18
+ },
+ {
+  "japanese": "耳",
+  "reading": "みみ",
+  "meaning": "耳朵",
+  "lesson": 18
+ },
+ {
+  "japanese": "口",
+  "reading": "くち",
+  "meaning": "嘴巴",
+  "lesson": 18
+ },
+ {
+  "japanese": "手",
+  "reading": "て",
+  "meaning": "手",
+  "lesson": 18
+ },
+ {
+  "japanese": "足",
+  "reading": "あし",
+  "meaning": "腳",
+  "lesson": 18
+ },
+ {
+  "japanese": "体",
+  "reading": "からだ",
+  "meaning": "身體",
+  "lesson": 18
+ },
+ {
+  "japanese": "病気",
+  "reading": "びょうき",
+  "meaning": "生病、疾病",
+  "lesson": 18
+ },
+ {
+  "japanese": "薬",
+  "reading": "くすり",
+  "meaning": "藥",
+  "lesson": 18
+ },
+ {
+  "japanese": "痛い",
+  "reading": "いたい",
+  "meaning": "疼痛的",
+  "lesson": 18
+ },
+ {
+  "japanese": "服",
+  "reading": "ふく",
+  "meaning": "衣服",
+  "lesson": 19
+ },
+ {
+  "japanese": "シャツ",
+  "reading": "しゃつ",
+  "meaning": "襯衫",
+  "lesson": 19
+ },
+ {
+  "japanese": "ズボン",
+  "reading": "ずぼん",
+  "meaning": "褲子",
+  "lesson": 19
+ },
+ {
+  "japanese": "靴",
+  "reading": "くつ",
+  "meaning": "鞋子",
+  "lesson": 19
+ },
+ {
+  "japanese": "帽子",
+  "reading": "ぼうし",
+  "meaning": "帽子",
+  "lesson": 19
+ },
+ {
+  "japanese": "赤",
+  "reading": "あか",
+  "meaning": "紅色",
+  "lesson": 19
+ },
+ {
+  "japanese": "青",
+  "reading": "あお",
+  "meaning": "藍色",
+  "lesson": 19
+ },
+ {
+  "japanese": "白",
+  "reading": "しろ",
+  "meaning": "白色",
+  "lesson": 19
+ },
+ {
+  "japanese": "黒",
+  "reading": "くろ",
+  "meaning": "黑色",
+  "lesson": 19
+ },
+ {
+  "japanese": "緑",
+  "reading": "みどり",
+  "meaning": "綠色",
+  "lesson": 19
+ },
+ {
+  "japanese": "値段",
+  "reading": "ねだん",
+  "meaning": "價格",
+  "lesson": 20
+ },
+ {
+  "japanese": "円",
+  "reading": "えん",
+  "meaning": "日圓",
+  "lesson": 20
+ },
+ {
+  "japanese": "買い物",
+  "reading": "かいもの",
+  "meaning": "購物",
+  "lesson": 20
+ },
+ {
+  "japanese": "店員",
+  "reading": "てんいん",
+  "meaning": "店員",
+  "lesson": 20
+ },
+ {
+  "japanese": "お釣り",
+  "reading": "おつり",
+  "meaning": "找零",
+  "lesson": 20
+ },
+ {
+  "japanese": "袋",
+  "reading": "ふくろ",
+  "meaning": "袋子",
+  "lesson": 20
+ },
+ {
+  "japanese": "財布",
+  "reading": "さいふ",
+  "meaning": "錢包",
+  "lesson": 20
+ },
+ {
+  "japanese": "百",
+  "reading": "ひゃく",
+  "meaning": "一百",
+  "lesson": 20
+ },
+ {
+  "japanese": "千",
+  "reading": "せん",
+  "meaning": "一千",
+  "lesson": 20
+ },
+ {
+  "japanese": "万",
+  "reading": "まん",
+  "meaning": "一萬",
+  "lesson": 20
+ },
+ {
+  "japanese": "毎日",
+  "reading": "まいにち",
+  "meaning": "每天",
+  "lesson": 21
+ },
+ {
+  "japanese": "毎週",
+  "reading": "まいしゅう",
+  "meaning": "每週",
+  "lesson": 21
+ },
+ {
+  "japanese": "毎月",
+  "reading": "まいつき",
+  "meaning": "每月",
+  "lesson": 21
+ },
+ {
+  "japanese": "毎年",
+  "reading": "まいとし",
+  "meaning": "每年",
+  "lesson": 21
+ },
+ {
+  "japanese": "午前",
+  "reading": "ごぜん",
+  "meaning": "上午",
+  "lesson": 21
+ },
+ {
+  "japanese": "午後",
+  "reading": "ごご",
+  "meaning": "下午",
+  "lesson": 21
+ },
+ {
+  "japanese": "先週",
+  "reading": "せんしゅう",
+  "meaning": "上週",
+  "lesson": 21
+ },
+ {
+  "japanese": "来週",
+  "reading": "らいしゅう",
+  "meaning": "下週",
+  "lesson": 21
+ },
+ {
+  "japanese": "先月",
+  "reading": "せんげつ",
+  "meaning": "上個月",
+  "lesson": 21
+ },
+ {
+  "japanese": "来月",
+  "reading": "らいげつ",
+  "meaning": "下個月",
+  "lesson": 21
+ },
+ {
+  "japanese": "仕事",
+  "reading": "しごと",
+  "meaning": "工作",
+  "lesson": 22
+ },
+ {
+  "japanese": "会議",
+  "reading": "かいぎ",
+  "meaning": "會議",
+  "lesson": 22
+ },
+ {
+  "japanese": "事務所",
+  "reading": "じむしょ",
+  "meaning": "辦公室",
+  "lesson": 22
+ },
+ {
+  "japanese": "宿題",
+  "reading": "しゅくだい",
+  "meaning": "作業",
+  "lesson": 22
+ },
+ {
+  "japanese": "試験",
+  "reading": "しけん",
+  "meaning": "考試",
+  "lesson": 22
+ },
+ {
+  "japanese": "質問",
+  "reading": "しつもん",
+  "meaning": "問題、提問",
+  "lesson": 22
+ },
+ {
+  "japanese": "答え",
+  "reading": "こたえ",
+  "meaning": "答案",
+  "lesson": 22
+ },
+ {
+  "japanese": "練習",
+  "reading": "れんしゅう",
+  "meaning": "練習",
+  "lesson": 22
+ },
+ {
+  "japanese": "休み",
+  "reading": "やすみ",
+  "meaning": "休假、休息",
+  "lesson": 22
+ },
+ {
+  "japanese": "名前",
+  "reading": "なまえ",
+  "meaning": "名字",
+  "lesson": 22
+ },
+ {
+  "japanese": "音楽",
+  "reading": "おんがく",
+  "meaning": "音樂",
+  "lesson": 23
+ },
+ {
+  "japanese": "映画",
+  "reading": "えいが",
+  "meaning": "電影",
+  "lesson": 23
+ },
+ {
+  "japanese": "写真",
+  "reading": "しゃしん",
+  "meaning": "照片、攝影",
+  "lesson": 23
+ },
+ {
+  "japanese": "旅行",
+  "reading": "りょこう",
+  "meaning": "旅行",
+  "lesson": 23
+ },
+ {
+  "japanese": "料理",
+  "reading": "りょうり",
+  "meaning": "料理",
+  "lesson": 23
+ },
+ {
+  "japanese": "歌",
+  "reading": "うた",
+  "meaning": "歌",
+  "lesson": 23
+ },
+ {
+  "japanese": "絵",
+  "reading": "え",
+  "meaning": "圖畫",
+  "lesson": 23
+ },
+ {
+  "japanese": "スポーツ",
+  "reading": "すぽーつ",
+  "meaning": "運動",
+  "lesson": 23
+ },
+ {
+  "japanese": "散歩",
+  "reading": "さんぽ",
+  "meaning": "散步",
+  "lesson": 23
+ },
+ {
+  "japanese": "ゲーム",
+  "reading": "げーむ",
+  "meaning": "遊戲",
+  "lesson": 23
+ },
+ {
+  "japanese": "犬",
+  "reading": "いぬ",
+  "meaning": "狗",
+  "lesson": 24
+ },
+ {
+  "japanese": "猫",
+  "reading": "ねこ",
+  "meaning": "貓",
+  "lesson": 24
+ },
+ {
+  "japanese": "鳥",
+  "reading": "とり",
+  "meaning": "鳥",
+  "lesson": 24
+ },
+ {
+  "japanese": "馬",
+  "reading": "うま",
+  "meaning": "馬",
+  "lesson": 24
+ },
+ {
+  "japanese": "花",
+  "reading": "はな",
+  "meaning": "花",
+  "lesson": 24
+ },
+ {
+  "japanese": "空",
+  "reading": "そら",
+  "meaning": "天空",
+  "lesson": 24
+ },
+ {
+  "japanese": "海",
+  "reading": "うみ",
+  "meaning": "海",
+  "lesson": 24
+ },
+ {
+  "japanese": "池",
+  "reading": "いけ",
+  "meaning": "池塘",
+  "lesson": 24
+ },
+ {
+  "japanese": "森",
+  "reading": "もり",
+  "meaning": "森林",
+  "lesson": 24
+ },
+ {
+  "japanese": "島",
+  "reading": "しま",
+  "meaning": "島",
+  "lesson": 24
+ },
+ {
+  "japanese": "開ける",
+  "reading": "あける",
+  "meaning": "打開",
+  "lesson": 25
+ },
+ {
+  "japanese": "閉める",
+  "reading": "しめる",
+  "meaning": "關閉",
+  "lesson": 25
+ },
+ {
+  "japanese": "入る",
+  "reading": "はいる",
+  "meaning": "進入",
+  "lesson": 25
+ },
+ {
+  "japanese": "出る",
+  "reading": "でる",
+  "meaning": "出去、離開",
+  "lesson": 25
+ },
+ {
+  "japanese": "立つ",
+  "reading": "たつ",
+  "meaning": "站立",
+  "lesson": 25
+ },
+ {
+  "japanese": "座る",
+  "reading": "すわる",
+  "meaning": "坐下",
+  "lesson": 25
+ },
+ {
+  "japanese": "持つ",
+  "reading": "もつ",
+  "meaning": "拿、持有",
+  "lesson": 25
+ },
+ {
+  "japanese": "置く",
+  "reading": "おく",
+  "meaning": "放置",
+  "lesson": 25
+ },
+ {
+  "japanese": "教える",
+  "reading": "おしえる",
+  "meaning": "教、告訴",
+  "lesson": 25
+ },
+ {
+  "japanese": "習う",
+  "reading": "ならう",
+  "meaning": "學習、跟人學",
+  "lesson": 25
+ },
+ {
+  "japanese": "電話する",
+  "reading": "でんわする",
+  "meaning": "打電話",
+  "lesson": 26
+ },
+ {
+  "japanese": "送る",
+  "reading": "おくる",
+  "meaning": "寄送、傳送",
+  "lesson": 26
+ },
+ {
+  "japanese": "借りる",
+  "reading": "かりる",
+  "meaning": "借入",
+  "lesson": 26
+ },
+ {
+  "japanese": "貸す",
+  "reading": "かす",
+  "meaning": "借出",
+  "lesson": 26
+ },
+ {
+  "japanese": "呼ぶ",
+  "reading": "よぶ",
+  "meaning": "呼叫",
+  "lesson": 26
+ },
+ {
+  "japanese": "答える",
+  "reading": "こたえる",
+  "meaning": "回答",
+  "lesson": 26
+ },
+ {
+  "japanese": "分かる",
+  "reading": "わかる",
+  "meaning": "明白、了解",
+  "lesson": 26
+ },
+ {
+  "japanese": "覚える",
+  "reading": "おぼえる",
+  "meaning": "記住",
+  "lesson": 26
+ },
+ {
+  "japanese": "忘れる",
+  "reading": "わすれる",
+  "meaning": "忘記",
+  "lesson": 26
+ },
+ {
+  "japanese": "見せる",
+  "reading": "みせる",
+  "meaning": "給人看",
+  "lesson": 26
+ },
+ {
+  "japanese": "一冊",
+  "reading": "いっさつ",
+  "meaning": "一本（書）",
+  "lesson": 27
+ },
+ {
+  "japanese": "二冊",
+  "reading": "にさつ",
+  "meaning": "兩本（書）",
+  "lesson": 27
+ },
+ {
+  "japanese": "一匹",
+  "reading": "いっぴき",
+  "meaning": "一隻（小動物）",
+  "lesson": 27
+ },
+ {
+  "japanese": "二匹",
+  "reading": "にひき",
+  "meaning": "兩隻（小動物）",
+  "lesson": 27
+ },
+ {
+  "japanese": "一杯",
+  "reading": "いっぱい",
+  "meaning": "一杯",
+  "lesson": 27
+ },
+ {
+  "japanese": "二杯",
+  "reading": "にはい",
+  "meaning": "兩杯",
+  "lesson": 27
+ },
+ {
+  "japanese": "一回",
+  "reading": "いっかい",
+  "meaning": "一次",
+  "lesson": 27
+ },
+ {
+  "japanese": "二回",
+  "reading": "にかい",
+  "meaning": "兩次",
+  "lesson": 27
+ },
+ {
+  "japanese": "一週間",
+  "reading": "いっしゅうかん",
+  "meaning": "一週",
+  "lesson": 27
+ },
+ {
+  "japanese": "一ヶ月",
+  "reading": "いっかげつ",
+  "meaning": "一個月",
+  "lesson": 27
+ },
+ {
+  "japanese": "何",
+  "reading": "なに",
+  "meaning": "什麼",
+  "lesson": 28
+ },
+ {
+  "japanese": "いつ",
+  "reading": "いつ",
+  "meaning": "何時",
+  "lesson": 28
+ },
+ {
+  "japanese": "どこ",
+  "reading": "どこ",
+  "meaning": "哪裡",
+  "lesson": 28
+ },
+ {
+  "japanese": "どう",
+  "reading": "どう",
+  "meaning": "如何",
+  "lesson": 28
+ },
+ {
+  "japanese": "どうして",
+  "reading": "どうして",
+  "meaning": "為什麼",
+  "lesson": 28
+ },
+ {
+  "japanese": "どれ",
+  "reading": "どれ",
+  "meaning": "哪一個",
+  "lesson": 28
+ },
+ {
+  "japanese": "どの",
+  "reading": "どの",
+  "meaning": "哪個……",
+  "lesson": 28
+ },
+ {
+  "japanese": "いくつ",
+  "reading": "いくつ",
+  "meaning": "幾個、幾歲",
+  "lesson": 28
+ },
+ {
+  "japanese": "いくら",
+  "reading": "いくら",
+  "meaning": "多少錢",
+  "lesson": 28
+ },
+ {
+  "japanese": "どんな",
+  "reading": "どんな",
+  "meaning": "什麼樣的",
+  "lesson": 28
+ },
+ {
+  "japanese": "おはよう",
+  "reading": "おはよう",
+  "meaning": "早安",
+  "lesson": 29
+ },
+ {
+  "japanese": "こんにちは",
+  "reading": "こんにちは",
+  "meaning": "你好",
+  "lesson": 29
+ },
+ {
+  "japanese": "こんばんは",
+  "reading": "こんばんは",
+  "meaning": "晚安、晚上好",
+  "lesson": 29
+ },
+ {
+  "japanese": "ありがとう",
+  "reading": "ありがとう",
+  "meaning": "謝謝",
+  "lesson": 29
+ },
+ {
+  "japanese": "すみません",
+  "reading": "すみません",
+  "meaning": "不好意思、對不起",
+  "lesson": 29
+ },
+ {
+  "japanese": "お願いします",
+  "reading": "おねがいします",
+  "meaning": "拜託、麻煩你",
+  "lesson": 29
+ },
+ {
+  "japanese": "大丈夫",
+  "reading": "だいじょうぶ",
+  "meaning": "沒問題、不要緊",
+  "lesson": 29
+ },
+ {
+  "japanese": "失礼します",
+  "reading": "しつれいします",
+  "meaning": "失禮了",
+  "lesson": 29
+ },
+ {
+  "japanese": "いただきます",
+  "reading": "いただきます",
+  "meaning": "開動了",
+  "lesson": 29
+ },
+ {
+  "japanese": "ごちそうさま",
+  "reading": "ごちそうさま",
+  "meaning": "謝謝招待",
+  "lesson": 29
+ },
+ {
+  "japanese": "予約",
+  "reading": "よやく",
+  "meaning": "預約",
+  "lesson": 30
+ },
+ {
+  "japanese": "約束",
+  "reading": "やくそく",
+  "meaning": "約定",
+  "lesson": 30
+ },
+ {
+  "japanese": "切符",
+  "reading": "きっぷ",
+  "meaning": "票",
+  "lesson": 30
+ },
+ {
+  "japanese": "地図",
+  "reading": "ちず",
+  "meaning": "地圖",
+  "lesson": 30
+ },
+ {
+  "japanese": "荷物",
+  "reading": "にもつ",
+  "meaning": "行李、物品",
+  "lesson": 30
+ },
+ {
+  "japanese": "住所",
+  "reading": "じゅうしょ",
+  "meaning": "地址",
+  "lesson": 30
+ },
+ {
+  "japanese": "番号",
+  "reading": "ばんごう",
+  "meaning": "號碼",
+  "lesson": 30
+ },
+ {
+  "japanese": "お土産",
+  "reading": "おみやげ",
+  "meaning": "伴手禮",
+  "lesson": 30
+ },
+ {
+  "japanese": "道",
+  "reading": "みち",
+  "meaning": "道路",
+  "lesson": 30
+ },
+ {
+  "japanese": "信号",
+  "reading": "しんごう",
+  "meaning": "紅綠燈",
+  "lesson": 30
+ }
+]

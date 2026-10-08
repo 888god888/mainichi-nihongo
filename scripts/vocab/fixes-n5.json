@@ -1,0 +1,38 @@
+{
+ "_說明": "上游 OpenJLPT 清單的人工修正。鍵為「原始 word|原始 reading」。drop=不收錄；override=覆寫欄位。 keep=即使與人工編排單字共用 JMdict 詞條仍保留（例如 速い／早い 在教學上是兩個詞）。",
+ "drop": {
+  "より、ほう|": "文法句型，不是單字"
+ },
+ "override": {
+  "せっけん|": {
+   "word": "石鹸",
+   "reading": "せっけん",
+   "meaning_en": "soap"
+  },
+  "キロ/キログラム|": {
+   "word": "キログラム",
+   "reading": "きろぐらむ",
+   "meaning_en": "kilogram"
+  },
+  "キロ/キロメートル|": {
+   "word": "キロメートル",
+   "reading": "きろめーとる",
+   "meaning_en": "kilometre"
+  },
+  "伯父/叔父|おじいさん": {
+   "word": "お祖父さん",
+   "reading": "おじいさん",
+   "meaning_en": "grandfather; elderly man"
+  },
+  "半分|はんぶん": {
+   "meaning_en": "half"
+  },
+  "私|わたくし": {
+   "reading": "わたし",
+   "meaning_en": "I; me"
+  }
+ },
+ "keep": [
+  "速い|はやい"
+ ]
+}

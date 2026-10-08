@@ -1,3 +1,5 @@
+import { n5Vocab, type VocabEntry } from "./vocabulary";
+
 export type Word = {
   japanese: string;
   reading: string;
@@ -428,4 +430,39 @@ const additionalLessons: Lesson[] = [
   },
 ];
 
-export const n5Lessons: Lesson[] = [...baseLessons, ...additionalLessons];
+// 第 31 課起：由 data/vocab/n5.json 的新增單字依主題順序自動分課（每課 10 字，沒有文法）。
+// 要增加單字，請改 scripts/vocab 底下的來源檔後執行 npm run vocab:build，不要直接改這裡。
+const VOCAB_LESSON_SIZE = 10;
+const MIN_LAST_LESSON_SIZE = 5;
+
+const toWord = (entry: VocabEntry): Word => ({
+  japanese: entry.word,
+  reading: entry.reading,
+  meaning: entry.meaning_zh,
+  reference: {
+    title: "Wiktionary 日文詞條",
+    url: `https://en.wiktionary.org/wiki/${encodeURIComponent(entry.word)}#Japanese`,
+  },
+});
+
+function buildVocabLessons(entries: VocabEntry[]): Lesson[] {
+  const words = entries
+    .filter((entry) => entry.source === "openjlpt")
+    .sort((a, b) => a.order - b.order)
+    .map(toWord);
+  const lessons: Lesson[] = [];
+  for (let start = 0; start < words.length; start += VOCAB_LESSON_SIZE) {
+    lessons.push({ words: words.slice(start, start + VOCAB_LESSON_SIZE), grammar: [] });
+  }
+  // 最後一課太短就併入前一課，避免只剩一兩個單字。
+  const last = lessons[lessons.length - 1];
+  if (lessons.length > 1 && last.words.length < MIN_LAST_LESSON_SIZE) {
+    lessons.pop();
+    lessons[lessons.length - 1].words.push(...last.words);
+  }
+  return lessons;
+}
+
+export const handmadeLessonCount = baseLessons.length + additionalLessons.length;
+
+export const n5Lessons: Lesson[] = [...baseLessons, ...additionalLessons, ...buildVocabLessons(n5Vocab)];
