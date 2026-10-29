@@ -1,0 +1,48 @@
+每日日本語｜45課・單字混合測驗（2026-10-29）
+
+更新方式
+1. 解壓縮，把 app、public、data、components、lib 資料夾合併上傳到 GitHub 專案根目錄。
+2. 保留每個檔案的相對路徑；不能只換 page.tsx，否則會缺少匯入的模組。
+3. Commit changes，等待 GitHub Actions 部署成功。
+本包包含上一次文法情境練習需要的檔案；即使尚未更新上次版本，也能一起更新。
+不需要修改 Supabase 資料表。
+
+容量：45課；450個不重複單字；135個文法主題；270題文法情境題。
+原本前30課的單字、文法及位置完全保留，新課附加在後面。
+新文法屬於初級延伸，非JLPT官方分級，不能視為完整N5或N4官方題庫。
+新詞條是人工編排；本次並未宣稱全庫已由字典逐條審核。
+
+單字練法
+- 第一次：聽音選中文；顯示假名，隱藏漢字。
+- 第二次：聽音拼假名，或看中文反查讀音；聽力仍為主。
+- 拼讀時先遮住假名；用假名按鍵組字，不必切換手機輸入法。
+- 提供慢速、重播及讀音提示；看提示不計通過次數。
+- 答錯重排，每字必須獨立答對兩次；正確進度成功寫入才完成。
+- 額外5組配對暖身，不影響正式通過紀錄。
+- 作答前不顯示漢字，作答後顯示漢字、假名與意思。
+
+課程進度
+- 今天已開始的課維持原樣。
+- 後續依學習紀錄接續；未完成的課優先，已完成課程盡量跳過。
+- 不再用當年第幾天的餘數選課。
+- 查不到紀錄時先顯示重試，避免用空進度覆蓋原紀錄。
+
+仍使用手機／瀏覽器合成語音，未在實體iPhone逐字驗聽。
+今日進度同步Supabase；文法間隔複習排程仍為目前裝置／瀏覽器儲存，依帳號區分。
+
+可搭配國際交流基金免費教材與詞彙／文法資源：
+https://www.irodori.jpf.go.jp/resources.html
+https://marugoto.jpf.go.jp/en/teacher/resource/elementary1_c/
+
+檔案清單（11個程式檔案）
+- app/page.tsx
+- app/globals.css
+- public/sw.js
+- data/lessons.ts
+- data/lessons-extra.ts
+- data/grammar-practice.ts
+- components/learning/grammar-practice.tsx
+- components/learning/word-practice.tsx
+- lib/grammar-learning.ts
+- lib/word-learning.ts
+- lib/lesson-selection.ts
